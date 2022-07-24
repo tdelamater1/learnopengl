@@ -14,6 +14,7 @@ set(CHAPTERS
 set(ch1
   hello_window
   triangle
+  hello_triangle
 )
 
 foreach(CHAPTER ${CHAPTERS})
