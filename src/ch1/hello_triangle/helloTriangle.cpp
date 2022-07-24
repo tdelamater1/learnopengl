@@ -123,10 +123,12 @@ int main() {
   }
 
   // dealocate resources here
+  glDeleteVertexArrays(1, &VAO);
+  glDeleteBuffers(1, &VBO);
+  glDeleteProgram(shaderProgram);
 
   glfwTerminate();
   return 0;
-
 }
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
