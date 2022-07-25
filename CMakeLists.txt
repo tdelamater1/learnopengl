@@ -9,6 +9,7 @@ set(LIBS ${LIBS} GLAD)
 
 set(CHAPTERS
   ch1
+  ch2
 )
 
 set(ch1
@@ -17,6 +18,10 @@ set(ch1
   hello_triangle
   trianglesMakeBox
   drawTwoTriangles
+)
+
+set(ch2
+  uniforms
 )
 
 foreach(CHAPTER ${CHAPTERS})
