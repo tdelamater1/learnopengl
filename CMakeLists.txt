@@ -15,6 +15,8 @@ set(ch1
   hello_window
   triangle
   hello_triangle
+  trianglesMakeBox
+  drawTwoTriangles
 )
 
 foreach(CHAPTER ${CHAPTERS})
