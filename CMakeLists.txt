@@ -22,6 +22,7 @@ set(ch1
 
 set(ch2
   uniforms
+  shaders_class
 )
 
 foreach(CHAPTER ${CHAPTERS})
@@ -36,6 +37,14 @@ foreach(CHAPTER ${CHAPTERS})
       PROPERTIES
       RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin/${CHAPTER}"
     )
+    # copy shader files to build directory
+    file(GLOB SHADERS 
+      "src/${CHAPTER}/${EXCERCISE}/*.fs"
+      "src/${CHAPTER}/${EXCERCISE}/*.vs"
+    )
+    foreach(SHADER ${SHADERS})
+      file(COPY ${SHADER} DESTINATION ${CMAKE_SOURCE_DIR}/bin/${CHAPTER})
+    endforeach(SHADER)
   endforeach(EXCERCISE)
 endforeach(CHAPTER)
 
