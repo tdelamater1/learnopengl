@@ -5,7 +5,8 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 set(LIBS glfw3 GL X11 pthread Xrandr Xi dl)
 
 add_library(GLAD "src/glad.c")
-set(LIBS ${LIBS} GLAD)
+add_library(STB "src/stb_image.cpp")
+set(LIBS ${LIBS} GLAD STB)
 
 set(CHAPTERS
   ch1
@@ -23,7 +24,11 @@ set(ch1
 set(ch2
   uniforms
   shaders_class
+  textures
 )
+
+configure_file(configuration/root_directory.h.in configuration/root_directory.h)
+include_directories(${CMAKE_BINARY_DIR}/configuration)
 
 foreach(CHAPTER ${CHAPTERS})
   foreach(EXCERCISE ${${CHAPTER}})
