@@ -55,6 +55,7 @@ set(ch2
   uniforms
   shaders_class
   textures
+  combined_textures
 )
 
 configure_file(configuration/root_directory.h.in configuration/root_directory.h)
@@ -79,7 +80,8 @@ function(create_project_from_sources chapter excercise)
             "src/${chapter}/${excercise}/*.fs"
             "src/${chapter}/${excercise}/*.gs"
             "src/${chapter}/${excercise}/*.cs"
-    )
+  )
+
 	if (excercise STREQUAL "")
 		SET(replaced "")
 		string(REPLACE "/" "_" replaced ${chapter})
@@ -87,22 +89,23 @@ function(create_project_from_sources chapter excercise)
 	else()
 		set(NAME "${chapter}__${excercise}")
 	endif()
-    add_executable(${NAME} ${SOURCE})
-    target_link_libraries(${NAME} ${LIBS})
-    set_target_properties(${NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin/${chapter}")
-        # copy shader files to build directory
-    file(GLOB SHADERS
-             "src/${chapter}/${excercise}/*.vs"
-             # "src/${chapter}/${excercise}/*.frag"
-             "src/${chapter}/${excercise}/*.fs"
-             "src/${chapter}/${excercise}/*.gs"
-	     "src/${chapter}/${excercise}/*.cs"
-    )
+
+  add_executable(${NAME} ${SOURCE})
+  target_link_libraries(${NAME} ${LIBS})
+  set_target_properties(${NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin/${chapter}")
+  # copy shader files to build directory
+  file(GLOB SHADERS
+           "src/${chapter}/${excercise}/*.vs"
+           # "src/${chapter}/${excercise}/*.frag"
+           "src/${chapter}/${excercise}/*.fs"
+           "src/${chapter}/${excercise}/*.gs"
+     "src/${chapter}/${excercise}/*.cs"
+  )
+  foreach(SHADER ${SHADERS})
+    file(COPY ${SHADER} DESTINATION ${CMAKE_SOURCE_DIR}/bin/${chapter})
+  endforeach(SHADER)
 	# copy dlls
 	file(GLOB DLLS "dlls/*.dll")
-    foreach(SHADER ${SHADERS})
-      file(COPY ${SHADER} DESTINATION ${CMAKE_SOURCE_DIR}/bin/${chapter})
-    endforeach(SHADER)
 endfunction()
 
 # then create a project file per tutorial
