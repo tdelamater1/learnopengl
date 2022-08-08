@@ -61,6 +61,8 @@ set(ch2
 
 set(ch3
   transform
+  floor
+  cube
 )
 
 configure_file(configuration/root_directory.h.in configuration/root_directory.h)
