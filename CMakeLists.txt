@@ -41,6 +41,7 @@ set (CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -ldl")
 set(CHAPTERS
   ch1
   ch2
+  ch3
 )
 
 set(ch1
@@ -56,6 +57,10 @@ set(ch2
   shaders_class
   textures
   combined_textures
+)
+
+set(ch3
+  transform
 )
 
 configure_file(configuration/root_directory.h.in configuration/root_directory.h)
